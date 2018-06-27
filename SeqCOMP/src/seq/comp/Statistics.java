@@ -11,6 +11,20 @@ public class Statistics {
 		System.out.println(cov(X, Y));
 	}
 	/**
+	 * 最大值求取
+	 * @param X
+	 * @return
+	 */
+	public static double max(double[] X) {
+		double max=Double.MIN_VALUE;
+		for(int i=0;i<X.length;i++) {
+			if(X[i]>max) {
+				max=X[i];
+			}
+		}
+		return max;
+	}
+	/**
 	 * @param X
 	 * @return
 	 * 计算平均数

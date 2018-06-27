@@ -16,13 +16,14 @@ public class Experiment3 {
 	 */
 	public static void testMultK() {
 		// set parameter
-		String dis = "D2star";
+		String dis = "MKWD2";
 		int startK = 2;
 		int kmax = 8;
 		boolean flag = true;
-		int code = 4;
+		int code = 1;
 		int r = 2;
 
+		
 		String[] data = ReadFile.readFileData2("src/e3/primates.txt", 27);
 		String[] name = ReadFile.readFileDataName("src/e3/primates.txt", 27);
 
@@ -73,24 +74,24 @@ public class Experiment3 {
 		}
 		// 标准化数据
 		// 找最大值
-		double max = -100;
-		double min = 10000;
-		for (int i = 0; i < disMatrix.length; i++) {
-			for (int j = 0; j < disMatrix.length; j++) {
-				if (disMatrix[i][j] > max) {
-					max = disMatrix[i][j];
-				}
-				if (disMatrix[i][j] < min) {
-					min = disMatrix[i][j];
-				}
-			}
-		}
-		double diff = max - min;
-		for (int i = 0; i < disMatrix.length; i++) {
-			for (int j = 0; j < disMatrix.length; j++) {
-				disMatrix[i][j] = (disMatrix[i][j] - min) / diff;
-			}
-		}
+//		double max = Double.MIN_VALUE;
+//		double min = Double.MAX_VALUE;
+//		for (int i = 0; i < disMatrix.length; i++) {
+//			for (int j = 0; j < disMatrix.length; j++) {
+//				if (disMatrix[i][j] > max) {
+//					max = disMatrix[i][j];
+//				}
+//				if (disMatrix[i][j] < min) {
+//					min = disMatrix[i][j];
+//				}
+//			}
+//		}
+//		double diff = max - min;
+//		for (int i = 0; i < disMatrix.length; i++) {
+//			for (int j = 0; j < disMatrix.length; j++) {
+//				disMatrix[i][j] = (disMatrix[i][j] - min) / diff;
+//			}
+//		}
 		for (int i = 0; i < disMatrix.length; i++) {
 			disMatrix[i][i] = 0.0;
 		}
@@ -113,18 +114,19 @@ public class Experiment3 {
 	 * 测试单个k 数据 code代表提取特征的模式，有count ，freq， D2count haoFeature dis
 	 * 表示距离模式：eur,cosine,ch,ma pcc，kld,hao,D2，D2S，D2star
 	 * 
-	 * eur,cosine,ch,ma ，pcc 不需要平滑 : flag=false code=0(freq); kld, 需要平滑 flag=true
-	 * code=0 D2 flag =flase ,code=1 (count) D2S，需要平滑 flag=true code=2(D2count)
+	 * eur,cosine,ch,ma ，pcc 
+	 * 不需要平滑 : flag=false code=0(freq); kld, 需要平滑 flag=true code=0 
+	 * D2 flag =flase ,code=1 (count) D2S，需要平滑 flag=true code=2(D2count)
 	 * r=0或1或2 hao特征 需要平滑 flag=true code =3 D2star需要平滑 flag=true code=4(D2starcount)
 	 * r=0或1或2
 	 */
 	public static void testSigK() {
 		// set parameter
-		String dis = "D2star";
-		int k =8;
+		String dis = "D2S";
+		int k =7;
 		boolean flag = true;
-		int code = 4;
-		int r =2;
+		int code = 2;
+		int r =1;
 		String[] allk_mer = SeqComp.getK_mer(k);
 
 		String[] data = ReadFile.readFileData2("src/e3/primates.txt", 27);
@@ -174,24 +176,24 @@ public class Experiment3 {
 		}
 		// 标准化数据
 		// 找最大值
-		double max = -100;
-		double min = 10000;
-		for (int i = 0; i < disMatrix.length; i++) {
-			for (int j = 0; j < disMatrix.length; j++) {
-				if (disMatrix[i][j] > max) {
-					max = disMatrix[i][j];
-				}
-				if (disMatrix[i][j] < min) {
-					min = disMatrix[i][j];
-				}
-			}
-		}
-		double diff = max - min;
-		for (int i = 0; i < disMatrix.length; i++) {
-			for (int j = 0; j < disMatrix.length; j++) {
-				disMatrix[i][j] = (disMatrix[i][j] - min) / diff;
-			}
-		}
+//		double max = Double.MIN_VALUE;
+//		double min = Double.MAX_VALUE;
+//		for (int i = 0; i < disMatrix.length; i++) {
+//			for (int j = 0; j < disMatrix.length; j++) {
+//				if (disMatrix[i][j] > max) {
+//					max = disMatrix[i][j];
+//				}
+//				if (disMatrix[i][j] < min) {
+//					min = disMatrix[i][j];
+//				}
+//			}
+//		}
+//		double diff = max - min;
+//		for (int i = 0; i < disMatrix.length; i++) {
+//			for (int j = 0; j < disMatrix.length; j++) {
+//				disMatrix[i][j] = (disMatrix[i][j] - min) / diff;
+//			}
+//		}
 		 for(int i=0;i<disMatrix.length;i++) {
 		 disMatrix[i][i]=0.0;
 		 }
@@ -251,11 +253,11 @@ public class Experiment3 {
 
 	private static double cptSim(double[] f1, double[] f2, double[] weight, String dis) {
 		double sim = 0.0;
-		if (dis.equals("D2")) {
+		if (dis.equals("MKWD2")) {
 			sim = Distance.D2Weighted(f1, f2, weight);
-		} else if (dis.equals("D2S")) {
+		} else if (dis.equals("MKWD2S")) {
 			sim = Distance.D2SWeighted(f1, f2, weight);
-		} else if (dis.equals("D2star")) {
+		} else if (dis.equals("MKWD2Star")) {
 			sim = Distance.D2starWeighted(f1, f2, weight);
 		}
 		return sim;

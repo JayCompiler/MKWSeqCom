@@ -155,5 +155,54 @@ public class WriteFile {
 		}
 		return true;
 	}
+	
+	public static void writeFeature(double[][] data,String filename) throws IOException {
+		// 创建文件
+		File pathname = new File("src/feature/" + filename);
+		try {
+			boolean b = createFile(pathname);
+			if (!b) {
+				System.out.println("创建文件失败！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 写数据到文件
+		int m = data.length;
+		int n = data[0].length;
+		BufferedWriter filewrite = new BufferedWriter(new FileWriter(pathname));
+		for (int i = 0; i < m; i++) {
+			String tmp = "";
+			for (int j = 0; j < n; j++) {
+				tmp = tmp + "\t" + data[i][j];
+			}
+			tmp = tmp + "\r";
+			filewrite.write(tmp);
+			filewrite.flush();
+		}
+		filewrite.close();
+	}
+	public static void writeLabel(String[] data,String filename) throws IOException {
+		// 创建文件
+		File pathname = new File("src/label/" + filename);
+		try {
+			boolean b = createFile(pathname);
+			if (!b) {
+				System.out.println("创建文件失败！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 写数据到文件
+		int m = data.length;
+		BufferedWriter filewrite = new BufferedWriter(new FileWriter(pathname));
+		for (int i = 0; i < m; i++) {
+			String tmp = "";
+			tmp = tmp + data[i]+ "\r";
+			filewrite.write(tmp);
+			filewrite.flush();
+		}
+		filewrite.close();
+	}
 
 }

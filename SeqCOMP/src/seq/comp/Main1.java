@@ -23,7 +23,6 @@ public class Main1 {
 	 */
 	public static void main(String[] args) {
 		HashMap<String, Integer> list = new HashMap<>();
-		
 		list.put("eur", 0);
 		list.put("cosine", 0);
 		list.put("ch", 0);
@@ -37,49 +36,70 @@ public class Main1 {
 		// int code=0;
 		// String dis="eur";
 		boolean flag = true; // 是否需要平滑
-		int r =0;
-		 int kmax=6;
+		int r =2;
+		 int kmax=8;
 		 int startK=2;
 		/* 不进行pca操作，单纯多个k值 */
-//		 double[][] acc=new double[list.size()][5];
-//		 Iterator<Entry<String, Integer>> iterator=list.entrySet().iterator();
-//		 int count=0;
-//		 while(iterator.hasNext()) {
-//		 Entry<String, Integer> entry=iterator.next();
-//		 acc[count]=Experiment1.testAllkWeight(flag,startK,kmax, entry.getValue(), entry.getKey(),r);
-//		 //acc[count]=Experiment1.testAllkNoPCA(flag, startK, kmax, entry.getValue(), entry.getKey(), r);
-//		 for (double ds : acc[count]) {
-//		 System.out.print(ds+" ");
-//		 }
-//		 
-//		 count++;
-//		 System.out.println();
-//		 }
+		 double[][] acc=new double[list.size()][5];
+		 Iterator<Entry<String, Integer>> iterator=list.entrySet().iterator();
+		 int count=0;
+		 while(iterator.hasNext()) {
+		 Entry<String, Integer> entry=iterator.next();
+		 acc[count]=Experiment1.testAllkWeight(flag,startK,kmax, entry.getValue(), entry.getKey(),r);
+		 //acc[count]=Experiment1.testAllkNoPCA(flag, startK, kmax, entry.getValue(), entry.getKey(), r);
+		 for (double ds : acc[count]) {
+		 System.out.print(ds+" ");
+		 }
+		 count++;
+		 System.out.println();
+		 }
 
 
 
 		/* 单个k值 */
-		double[][][] acc = new double[list.size()][7][5];
-		Iterator<Entry<String, Integer>> iterator = list.entrySet().iterator();
-		int count = 0;
-		while (iterator.hasNext()) {
-			Entry<String, Integer> entry = iterator.next();
-			int count1 = 0;
-			for (int k = 2; k <= 8; k++) {
-				acc[count][count1] = Experiment1.test(k, r, flag, entry.getValue(), entry.getKey());
-				count1++;
-			}
-			System.out.println("the " + entry.getKey() + " result is:");
-			for (double[] ds : acc[count]) {
-				System.out.println();
-				for (double d : ds) {
-					System.out.print(d + " ");
-				}
-				System.out.println();
-			}
-			count++;
-			System.out.println();
-		}
+//		double[][][] acc = new double[list.size()][7][5];
+//		Iterator<Entry<String, Integer>> iterator = list.entrySet().iterator();
+//		int count = 0;
+//		while (iterator.hasNext()) {
+//			Entry<String, Integer> entry = iterator.next();
+//			int count1 = 0;
+//			for (int k = 2; k <= 8; k++) {
+//				acc[count][count1] = Experiment1.test(k, r, flag, entry.getValue(), entry.getKey());
+//				count1++;
+//			}
+//			System.out.println("the " + entry.getKey() + " result is:");
+//			for (double[] ds : acc[count]) {
+//				System.out.println();
+//				for (double d : ds) {
+//					System.out.print(d + " ");
+//				}
+//				System.out.println();
+//			}
+//			count++;
+//			System.out.println();
+//		}
+			/* 不进行pca操作，单个k值 */
+//			double[][][] acc = new double[list.size()][7][5];
+//			Iterator<Entry<String, Integer>> iterator = list.entrySet().iterator();
+//			int count = 0;
+//			while (iterator.hasNext()) {
+//				Entry<String, Integer> entry = iterator.next();
+//				int count1 = 0;
+//				for (int k = 2; k <= 8; k++) {
+//					acc[count][count1] = Experiment1.testWeight(k, r, flag, entry.getValue(), entry.getKey());
+//					count1++;
+//				}
+//				System.out.println("the " + entry.getKey() + " result is:");
+//				for (double[] ds : acc[count]) {
+//					System.out.println();
+//					for (double d : ds) {
+//						System.out.print(d + " ");
+//					}
+//					System.out.println();
+//				}
+//				count++;
+//				System.out.println();
+//			}
 
 	}
 

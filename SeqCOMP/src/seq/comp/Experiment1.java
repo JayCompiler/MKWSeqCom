@@ -71,9 +71,7 @@ public class Experiment1 {
 		Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
 		int count = 0;
 		String[] others = new String[39];
-
 		ArrayList<GenePair> genePairs = new ArrayList<>();
-
 		GenePair[] genePair = new GenePair[39];
 
 		while (it.hasNext()) {
@@ -127,7 +125,8 @@ public class Experiment1 {
 		// 使用freqs 计算权重
 		double[] weight = SeqComp.getWeight(freqs);
 		// double[][] pcaFeature = tmpFeature;
-
+		double maxweight = Statistics.max(weight);
+		System.out.println("max WEight k="+k+":"+maxweight);
 		// 计算相似度
 		for (int i = 0; i < otherFeatures.length; i++) {
 			double sim = 0.0;
@@ -310,6 +309,55 @@ public class Experiment1 {
 		}
 		// 使用freqs 计算权重
 		double[] weight = SeqComp.getWeight(freqs);
+		int index=0;
+		double[] w2=new double[(int)Math.pow(4, 2)];
+		for(;index<(int)Math.pow(4, 2);index++) {
+			w2[index]=weight[index];
+		}
+		double max2=Statistics.max(w2);
+		double mean2=Statistics.mean(w2);
+		double[] w3=new double[(int)Math.pow(4, 3)];
+		for(;(index-(int)Math.pow(4, 2))<(int)Math.pow(4, 3);index++) {
+			w3[index-(int)Math.pow(4, 2)]=weight[index];
+		}
+		double max3=Statistics.max(w3);
+		double mean3=Statistics.mean(w3);
+		double[] w4=new double[(int)Math.pow(4, 4)];
+		for(;(index-(int)Math.pow(4, 3))<(int)Math.pow(4, 4);index++) {
+			w4[index-(int)Math.pow(4, 3)]=weight[index];
+		}
+		double mean4=Statistics.mean(w4);
+		double max4=Statistics.max(w4);
+		double[] w5=new double[(int)Math.pow(4, 5)];
+		for(;(index-(int)Math.pow(4, 4))<(int)Math.pow(4, 5);index++) {
+			w5[index-(int)Math.pow(4, 4)]=weight[index];
+		}
+		double max5=Statistics.max(w5);
+		double mean5=Statistics.mean(w5);
+		double[] w6=new double[(int)Math.pow(4, 6)];
+		for(;(index-(int)Math.pow(4, 5))<(int)Math.pow(4, 6);index++) {
+			w6[index-(int)Math.pow(4, 5)]=weight[index];
+		}
+		double mean6=Statistics.mean(w6);
+		double max6=Statistics.max(w6);
+		double[] w7=new double[(int)Math.pow(4, 7)];
+		for(;(index-(int)Math.pow(4, 6))<(int)Math.pow(4, 7);index++) {
+			w7[index-(int)Math.pow(4, 6)]=weight[index];
+		}
+		double max7=Statistics.max(w7);
+		double mean7=Statistics.mean(w7);
+		double[] w8=new double[(int)Math.pow(4, 8)];
+		for(;(index-(int)Math.pow(4, 7))<(int)Math.pow(4,8);index++) {
+			w8[index-(int)Math.pow(4, 7)]=weight[index];
+		}
+		double mean8=Statistics.mean(w8);
+		double max8=Statistics.max(w8);
+		System.out.println("max2:"+max2+" max3:"+max3
+				+" max4:"+max4+" max5:"+max5+
+				" max6:"+max6+" max7:"+max7+" max8:"+max8);
+		System.out.println("m2:"+mean2+" m3:"+mean3
+				+" m4:"+mean4+" m5:"+mean5+
+				" m6:"+mean6+" m7:"+mean7+" m8:"+mean8);
 		double[][] pcaFeature = tmpFeature;
 
 		// 计算相似度
